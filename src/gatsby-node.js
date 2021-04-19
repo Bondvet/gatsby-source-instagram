@@ -55,7 +55,7 @@ function createPostNode(datum, params) {
       params.type === `hashtag`
         ? params.hashtag
         : datum.username || datum.owner.username || datum.owner.id,
-    id: datum.shortcode,
+    id: datum.shortcode || datum.id,
     parent: `__SOURCE__`,
     internal: {
       type: `InstaNode`,
@@ -105,10 +105,7 @@ function createUserNode(datum, params) {
 }
 
 function getContentDigest(node) {
-  return crypto
-    .createHash(`md5`)
-    .update(JSON.stringify(node))
-    .digest(`hex`)
+  return crypto.createHash(`md5`).update(JSON.stringify(node)).digest(`hex`)
 }
 
 function processDatum(datum, params) {
@@ -125,7 +122,7 @@ function processDatum(datum, params) {
 
 exports.sourceNodes = async (
   { actions, store, cache, createNodeId, getNode, reporter },
-  options,
+  options
 ) => {
   const { createNode, touchNode } = actions
   const params = { ...defaultOptions, ...options }
@@ -190,7 +187,7 @@ exports.sourceNodes = async (
           reporter,
         })
         createNode(res)
-      }),
+      })
     )
   }
 }

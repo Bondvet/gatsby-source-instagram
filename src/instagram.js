@@ -116,23 +116,24 @@ export async function apiInstagramPosts({
 
   return axios
     .get(
-      `https://graph.facebook.com/v7.0/${instagram_id}/media?fields=media_url,thumbnail_url,caption,media_type,like_count,shortcode,timestamp,comments_count,username,children{media_url},permalink${commentsParam}&limit=${paginate}&access_token=${access_token}`
+      `https://graph.instagram.com/me?fields=media{id,media_url,thumbnail_url,caption,media_type,like_count,shortcode,timestamp,comments_count,username,children{media_url},permalink${commentsParam}}&limit=${paginate}&access_token=${access_token}`
     )
     .then(async (response) => {
       const results = []
-      results.push(...response.data.data)
-      
+      let media = response.data.media
+      results.push(...media.data)
+
       /**
        * If maxPosts option specified, then check if there is a next field in the response data and the results' length <= maxPosts
        * otherwise, fetch as more as it can.
        */
       while (
         maxPosts
-          ? response.data.paging.next && results.length <= maxPosts
-          : response.data.paging.next
+          ? media.paging.next && results.length <= maxPosts
+          : media.paging.next
       ) {
-        response = await axios(response.data.paging.next)
-        results.push(...response.data.data)
+        media = await axios(media.paging.next).then(({ data }) => data)
+        results.push(...media.data)
       }
 
       // if hashtags are true extract hashtags from captions and comments
@@ -144,6 +145,7 @@ export async function apiInstagramPosts({
       console.warn(
         `\nCould not get instagram posts using the Graph API. Error status ${err}`
       )
+      console.warn(err.stack)
       console.warn(`Falling back to public scraping... with ${username}`)
 
       if (username) {
