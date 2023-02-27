@@ -83,7 +83,7 @@ exports.downloadMediaFile = async ({
   })
 
   /** eslint-disable-next-line require-atomic-updates */
-  if (fileNodeID) datum.localFile___NODE = fileNodeID
+  if (fileNodeID) datum.localFile = fileNodeID
 
   /** If all we have is a single image stop here */
   if (!carouselImages.length) return datum
@@ -105,7 +105,7 @@ exports.downloadMediaFile = async ({
 
     /** eslint-disable-next-line require-atomic-updates */
     if (carouselFileNodeID)
-      datum.carouselImages[i].localFile___NODE = carouselFileNodeID
+      datum.carouselImages[i].localFile = carouselFileNodeID
   }
 
   return datum

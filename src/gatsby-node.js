@@ -155,7 +155,7 @@ exports.sourceNodes = async (
       type: `InstaNode`,
       contentDigest: getContentDigest(content),
     },
-    localFile___NODE: fileNode.id,
+    localFile: fileNode.id,
   }
 
   createNode(node)
