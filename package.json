@@ -1,7 +1,7 @@
 {
   "name": "@bondvet/gatsby-source-instagram",
   "description": "Gatsby source plugin for fetching instagram posts",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": "Orestis Ioannou <oorestisime@gmail.com>",
   "main": "index.js",
   "bugs": {
