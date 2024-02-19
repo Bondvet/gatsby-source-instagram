@@ -1,7 +1,7 @@
 {
   "name": "@bondvet/gatsby-source-instagram",
   "description": "Gatsby source plugin for fetching instagram posts",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "author": "Orestis Ioannou <oorestisime@gmail.com>",
   "main": "index.js",
   "bugs": {
@@ -32,8 +32,8 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "gatsby": "^3.0.0 || ^4.0.0 || ^5.0.0",
-    "gatsby-source-filesystem": "^3.1.0 || ^5.7.0"
+    "gatsby": "^3.0.0 || ^4.0.0 || ^5.13.0",
+    "gatsby-source-filesystem": "^3.1.0 || ^5.13.1"
   },
   "repository": "https://github.com/oorestisime/gatsby-source-instagram",
   "scripts": {
